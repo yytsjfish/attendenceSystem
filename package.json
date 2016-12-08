@@ -1,0 +1,19 @@
+{
+  "name": "attendencesys",
+  "version": "1.0.0",
+  "description": "a lonely attendece system ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fujiazhiyu/attendenceSystem.git"
+  },
+  "author": "yufujia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fujiazhiyu/attendenceSystem/issues"
+  },
+  "homepage": "https://github.com/fujiazhiyu/attendenceSystem#readme"
+}
