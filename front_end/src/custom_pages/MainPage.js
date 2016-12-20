@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import auth from '../custom_components/auth';
-import { Link, } from 'react-router';
+import { Link, IndexLink, } from 'react-router';
 import { Menu, Breadcrumb, Button, Icon } from 'antd';
 import 'antd/dist/antd.min.css';
 import '../custom_styles/main_layout.css';
@@ -12,7 +12,14 @@ class MainPage extends Component {
     super(props);
     this.state = {
       collapse: true,
+      account: {},
     };
+  }
+
+  componentWillMount() {
+    this.setState((prevStatem, props) => ({
+      account: JSON.parse(auth.getAccount()),
+    }));
   }
 
   onCollapseChange() {
@@ -22,53 +29,70 @@ class MainPage extends Component {
   }
 
   handleClick=() => {
-    console.log(auth.logout);
     auth.logout();
   }
 
   render() {
     const collapse = this.state.collapse;
-    var UncheckedSubMenu =
-      (<SubMenu key="notification" title={<span className="nav-text"><Icon type="notification" />{!collapse && '待审批申请'}</span>} >
+    var UncheckedSubMenu = (
+      <SubMenu key="notification" title={<span className="nav-text"><Icon type="notification" />{!collapse && '待审批申请'}</span>} >
          <Menu.Item key="1">
+           <Link to="/mainpage/wait/staffout">
            <Icon type="rocket" />
              {!collapse && '员工外出申请'}
+           </Link>
          </Menu.Item>
          <Menu.Item key="2">
+           <Link to="/mainpage/wait/staffleave">
            <Icon type="clock-circle-o" />
              {!collapse && '员工请假申请'}
+           </Link>
          </Menu.Item>
-       </SubMenu>);
+      </SubMenu>
+    );
 
-    var CheckedSubMenu =
-      (<SubMenu key="copy" title={<span className="nav-text"><Icon type="copy" />{!collapse && '已审批申请'}</span>} >
-         <Menu.Item key="3">
-           <Icon type="rocket" />
-             {!collapse && '员工外出申请'}
-         </Menu.Item>
-         <Menu.Item key="4">
-           <Icon type="clock-circle-o" />
-             {!collapse && '员工请假申请'}
-         </Menu.Item>
-       </SubMenu>);
-
+     var CheckedSubMenu = (
+       <SubMenu key="copy" title={<span className="nav-text"><Icon type="copy" />{!collapse && '已审批申请'}</span>} >
+          <Menu.Item key="3">
+            <Link to="/mainpage/already/staffout">
+            <Icon type="rocket" />
+              {!collapse && '员工外出申请'}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <Link to="/mainpage/already/staffleave">
+            <Icon type="clock-circle-o" />
+              {!collapse && '员工请假申请'}
+            </Link>
+          </Menu.Item>
+        </SubMenu>
+     );
 
     return (
       <div className={collapse ? "ant-layout-aside ant-layout-aside-collapse" : "ant-layout-aside"}>
         <aside className="ant-layout-sider">
           <div className="ant-layout-logo"><img src={logoURL} alt="" /><h3 style={{padding: 4}} >考勤系统</h3></div>
           <Menu mode="inline" theme="dark" defaultSelectedKeys={['calendar']} >
+
             <Menu.Item key="calendar">
+              <Link to="/mainpage/myattendence">
               <Icon type="calendar" />
               {!collapse && <span className="nav-text">我的打卡记录</span>}
+              </Link>
             </Menu.Item>
+
             <Menu.Item key="user">
+              <Link to="/mainpage/myout">
               <Icon type="user" />
               {!collapse && <span className="nav-text">我的外出</span>}
+              </Link>
             </Menu.Item>
+
             <Menu.Item key="book">
+              <Link to="/mainpage/myleave">
               <Icon type="book" />
               {!collapse && <span className="nav-text">我的请假</span>}
+              </Link>
             </Menu.Item>
 
             {UncheckedSubMenu}
@@ -84,10 +108,19 @@ class MainPage extends Component {
         <div className="ant-layout-main">
 
           <div className="ant-layout-ceiling">
-            <div className="ant-layout-wrapper right">
-              Hello, {auth.getAccount()} &nbsp;
-              <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
-            </div>
+
+            {this.state.collapse ?
+              <div className="ant-layout-wrapper right-collapsed">
+                Hello, {this.state.account.username} &nbsp;
+                <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
+              </div>
+              :
+              <div className="ant-layout-wrapper right-uncollapse">
+                Hello, {this.state.account.username} &nbsp;
+                <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
+              </div>
+            }
+
           </div>
 
           <div className="ant-layout-header"></div>

@@ -18,15 +18,14 @@ const Login = Form.create()(class LoginForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         const account = values.userName;
         const password = values.password;
-        console.log('account password', account +'::'+password);
 
         auth.login(account, password, (loggedIn) => {
           if (!loggedIn)
             return this.setState({ error: true });
 
+          console.log('this.props:', this.props);
           const { location } = this.props;
 
           if (location.state && location.state.nextPathname) {

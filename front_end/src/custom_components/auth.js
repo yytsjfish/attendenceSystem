@@ -1,7 +1,4 @@
 export default {
-  testSingleton() {
-    console.log(this.onChange);
-  },
 
   login(email, pass, cb) {
     cb = arguments[arguments.length - 1]
@@ -28,11 +25,13 @@ export default {
   },
 
   getAccount() {
+    console.log('account::', localStorage.account);
     return localStorage.account
   },
 
   logout(cb) {
     delete localStorage.token
+    delete localStorage.account
     if (cb) cb()
     this.onChange(false)
   },
@@ -60,10 +59,11 @@ export default {
 function pretendRequest(email, pass, cb) {
   setTimeout(() => {
     if (email === 'yufujia' && pass === "fish95520") {
+      var Account = JSON.stringify({username: email, password: pass});
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7),
-        account: email
+        account: Account
       })
     } else {
       cb({ authenticated: false })

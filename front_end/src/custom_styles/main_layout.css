@@ -194,8 +194,25 @@
   width: 100%;
 }
 
-@media (min-device-width: 375px) {
-  .ant-layout-ceiling .right {
+@media (min-device-width: 400px) {
+  .ant-layout-ceiling .right-uncollapse {
+    float: right;
+    margin-top: 1.75rem;
+    margin-right: 20rem;
+  }
+  .ant-layout-ceiling .right-collapsed {
+    float: right;
+    margin-top: 1.75rem;
+    margin-right: 5rem;
+  }
+}
+
+@media (min-device-width: 374px) {
+  .ant-layout-ceiling .right-uncollapse {
+    float: right;
+    margin-right: 18rem;
+  }
+  .ant-layout-ceiling .right-collapsed {
     float: right;
     margin-top: 1.75rem;
     margin-right: 5rem;
