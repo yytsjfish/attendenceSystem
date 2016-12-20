@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Menu, Breadcrumb, Icon } from 'antd';
-// import UncheckedSubMenu from '../custom_components/UncheckedSubMenu';
-// import CheckedSubMenu from '../custom_components/CheckedSubMenu';
+import auth from '../custom_components/auth';
+import { Link, } from 'react-router';
+import { Menu, Breadcrumb, Button, Icon } from 'antd';
 import 'antd/dist/antd.min.css';
 import '../custom_styles/main_layout.css';
 import logoURL from '../custom_components/logo.png';
@@ -11,7 +11,7 @@ class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapse: false,
+      collapse: true,
     };
   }
 
@@ -19,12 +19,16 @@ class MainPage extends Component {
     this.setState((prevState, props) => ({
       collapse: !prevState.collapse,
     }));
-    console.log(this.state.collapse + "shuchu++++++++++++");
+  }
+
+  handleClick=() => {
+    console.log(auth.logout);
+    auth.logout();
   }
 
   render() {
     const collapse = this.state.collapse;
-    var UncheckedSubMenu = 
+    var UncheckedSubMenu =
       (<SubMenu key="notification" title={<span className="nav-text"><Icon type="notification" />{!collapse && '待审批申请'}</span>} >
          <Menu.Item key="1">
            <Icon type="rocket" />
@@ -36,7 +40,7 @@ class MainPage extends Component {
          </Menu.Item>
        </SubMenu>);
 
-    var CheckedSubMenu = 
+    var CheckedSubMenu =
       (<SubMenu key="copy" title={<span className="nav-text"><Icon type="copy" />{!collapse && '已审批申请'}</span>} >
          <Menu.Item key="3">
            <Icon type="rocket" />
@@ -52,7 +56,7 @@ class MainPage extends Component {
     return (
       <div className={collapse ? "ant-layout-aside ant-layout-aside-collapse" : "ant-layout-aside"}>
         <aside className="ant-layout-sider">
-          <div className="ant-layout-logo"><img src={logoURL} /><h3 style={{padding: 4}} >考勤系统</h3></div>
+          <div className="ant-layout-logo"><img src={logoURL} alt="" /><h3 style={{padding: 4}} >考勤系统</h3></div>
           <Menu mode="inline" theme="dark" defaultSelectedKeys={['calendar']} >
             <Menu.Item key="calendar">
               <Icon type="calendar" />
@@ -80,12 +84,9 @@ class MainPage extends Component {
         <div className="ant-layout-main">
 
           <div className="ant-layout-ceiling">
-            <div className="ant-layout-wrapper">
-              <ul className="right">
-                <li>Email: fujiazhiyu@sina.com</li>
-                <li>|</li>
-                <li>联系电话: +86 13102219303</li>
-              </ul>
+            <div className="ant-layout-wrapper right">
+              Hello, {auth.getAccount()} &nbsp;
+              <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
             </div>
           </div>
 

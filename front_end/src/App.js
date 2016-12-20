@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-import Login from './custom_pages/Login';
+import auth from './custom_components/auth';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: auth.loggedIn(),
+    };
+  }
+
+  updateAuth=(loggedIn)=>{
+
+    this.setState((prevState, props) => ({
+      loggedIn
+    }));
+  };
+
+  componentWillMount() {
+    auth.onChange = this.updateAuth;
+    auth.login();
+  }
+
   render() {
-    return(
-        <Login />
+    return (
+      <div>
+        {this.props.children}
+      </div>
     );
   }
+
 }
 
 export default App;

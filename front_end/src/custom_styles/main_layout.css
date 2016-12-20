@@ -186,7 +186,7 @@
 
 .ant-layout-ceiling {
   font-size: 13px;
-  height: 64px;
+  height: 68px;
   line-height: 30px;
   background-color: #404040;
   color: #ddd;
@@ -194,15 +194,18 @@
   width: 100%;
 }
 
-.ant-layout-ceiling .right {
-  float: right;
-  margin-right: 180px; 
+@media (min-device-width: 375px) {
+  .ant-layout-ceiling .right {
+    float: right;
+    margin-top: 1.75rem;
+    margin-right: 5rem;
+  }
 }
 
 .ant-layout-ceiling ul li {
   display: inline-block;
   margin-top: 18px;
-  margin-right: 5px; 
+  margin-right: 5px;
 }
 
 .ant-layout-wrapper {
