@@ -4,24 +4,24 @@ import '../custom_styles/my_out.css';
 
 const data = [{
   key: '1',
-  name: 'John Brown',
-  age: 32,
-  address: 'New York No. 1 Lake Park',
+  type: '培训',
+  days: 32,
+  reason: 'New York No. 1 Lake Park',
 }, {
   key: '2',
-  name: 'Jim Green',
-  age: 42,
-  address: 'London No. 1 Lake Park',
+  type: '招聘',
+  days: 7,
+  reason: 'London No. 1 Lake Park',
 }, {
   key: '3',
-  name: 'Joe Black',
-  age: 32,
-  address: 'Sidney No. 1 Lake Park',
+  type: '技术支援',
+  days: 15,
+  reason: 'Sidney No. 1 Lake Park',
 }, {
   key: '4',
-  name: 'Jim Red',
-  age: 32,
-  address: 'London No. 2 Lake Park',
+  type: '市场调研',
+  days: 3,
+  reason: 'London No. 2 Lake Park',
 }];
 
 class MyOut extends React.Component {
@@ -35,12 +35,14 @@ class MyOut extends React.Component {
   }
 
   onInputChange=(e) => {
+    console.log('e.target::', e.target.value);
     this.setState((prevState, props) => ({
       searchText: e.target.value,
     }));
   }
 
   onSearch=() => {
+    console.log('search text::', this.state.searchText);
     const { searchText } = this.state;
     const reg = new RegExp(searchText, 'gi');
     this.setState((prevState, props) => ({
@@ -66,13 +68,13 @@ class MyOut extends React.Component {
 
   render () {
     const columns = [{
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: '外出类型',
+      dataIndex: 'type',
+      key: 'type',
       filterDropdown: (
         <div className="custom-filter-dropdown">
           <Input
-            placeholder="Search name"
+            placeholder="搜索类型"
             value={this.state.searchText}
             onChange={this.onInputChange}
             onPressEnter={this.onSearch}
@@ -85,13 +87,13 @@ class MyOut extends React.Component {
          filterDropdownVisible: visible
        })),
     }, {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: '外出天数',
+      dataIndex: 'days',
+      key: 'days',
     }, {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: '详细原因',
+      dataIndex: 'reason',
+      key: 'reason',
     }];
 
     return (

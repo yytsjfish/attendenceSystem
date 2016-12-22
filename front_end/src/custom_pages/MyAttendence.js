@@ -3,7 +3,7 @@ import { Calendar } from 'antd';
 import zhCN from 'antd/lib/calendar/locale/zh_CN';
 import moment from 'moment';
 
-const data=[{}];
+// const data=[{}];
 
 class MyAttendence extends React.Component {
   constructor(props) {
