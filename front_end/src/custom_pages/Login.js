@@ -14,6 +14,10 @@ const Login = Form.create()(class LoginForm extends Component {
     }
   }
 
+/*
+* this.props.router属性，只有组件在Router中被withRouter()调用后获得
+*/
+
   handleSubmit=(e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -37,31 +41,6 @@ const Login = Form.create()(class LoginForm extends Component {
       }
     });
   }
-
-  // handleSubmit=(event) => {
-  //   event.preventDefault();
-//
-    // const email = this.refs.email.value;
-    // const pass = this.refs.pass.value;
-    //
-    // const email = "";
-    // const pass = "";
-
-    /*eslint no-console: ["error", { allow: ["log","warn", "error"] }] */
-
-  //   auth.login(email, pass, (loggedIn) => {
-  //     if (!loggedIn)
-  //       return this.setState({ error: true });
-  //
-  //     const { location } = this.props;
-  //
-  //     if (location.state && location.state.nextPathname) {
-  //       this.props.router.replace(location.state.nextPathname);
-  //     } else {
-  //       this.props.router.replace('/mainpage');
-  //     }
-  //   })
-  // }
 
   render() {
     const { getFieldDecorator } = this.props.form;

@@ -6,12 +6,11 @@ import auth from '../custom_components/auth';
 import Login from '../custom_pages/Login';
 import MainPageRoutes from '../custom_components/MainPageRoutes';
 import ManagerRoutes from '../custom_components/ManagerRoutes';
+import NotFound from '../custom_pages/NotFound';
 
 
 class CustomRouter extends React.Component {
   requireAuth=(nextState, replace) => {
-    console.log("auth.loggedIn:");
-    console.log(auth.loggedIn());
     if (!auth.loggedIn()) {
       replace({
         pathname: '/login',
@@ -20,21 +19,35 @@ class CustomRouter extends React.Component {
     }
   }
 
-
+  /*
+  * 进入mainpage的页面之前验证路径是否正确，否则返回404
+  */
+  checkURL=(nextState, replace) => {
+    if ( [ 'myattendence', 'myout', 'myleave', 'wait', 'already' ].indexOf(nextState.params.pagename) === -1 ) {
+      replace('/notfound');
+    } else if(['wait', 'already'].indexOf(nextState.params.pagename) === -1){
+      if(nextState.params.apply)
+        replace('/notfound');
+    } else {
+      if ( nextState.params.apply && [ 'staffout', 'staffleave' ].indexOf(nextState.params.apply) === -1 )
+        replace('/notfound');
+    }
+  }
 
   render () {
     const LogIn = withRouter(Login);
 
     return (
       <Router history={browserHistory}>
-        <Route path="/" component={App}>
+        <Route path="/" component={App} >
           <IndexRedirect to="/login" />
           <Route path="login" component={LogIn} />
-          <Redirect from="/mainpage" to="/mainpage/myattendence" />
+          <Redirect from="mainpage" to="mainpage/myattendence" />
           <Route path="mainpage" component={MainPage} onEnter={this.requireAuth} >
-            <Route path="/mainpage/:pagename" component={MainPageRoutes} />
-            <Route path="/mainpage/:pagename/:apply" component={ManagerRoutes} />
+            <Route path="/mainpage/:pagename" component={MainPageRoutes} onEnter={this.checkURL} />
+            <Route path="/mainpage/:pagename/:apply" component={ManagerRoutes} onEnter={this.checkURL} />
           </Route>
+          <Route path="**" component={NotFound} />
         </Route>
       </Router>
     );
