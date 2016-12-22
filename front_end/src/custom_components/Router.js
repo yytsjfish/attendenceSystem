@@ -1,7 +1,7 @@
 import React from 'react';
 import App from '../App';
 import MainPage from '../custom_pages/MainPage';
-import { browserHistory, Router, Route, withRouter, IndexRedirect, IndexRoute, Redirect } from 'react-router';
+import { browserHistory, Router, Route, withRouter, IndexRedirect, Redirect } from 'react-router';
 import auth from '../custom_components/auth';
 import Login from '../custom_pages/Login';
 import MainPageRoutes from '../custom_components/MainPageRoutes';

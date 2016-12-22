@@ -25,7 +25,6 @@ export default {
   },
 
   getAccount() {
-    console.log('account::', localStorage.account);
     return localStorage.account
   },
 

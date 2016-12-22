@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import auth from '../custom_components/auth';
-import { Link, IndexLink, } from 'react-router';
+import { Link, } from 'react-router';
 import { Menu, Breadcrumb, Button, Icon } from 'antd';
 import 'antd/dist/antd.min.css';
 import '../custom_styles/main_layout.css';
@@ -106,24 +106,21 @@ class MainPage extends Component {
         </aside>
 
         <div className="ant-layout-main">
-
-          <div className="ant-layout-ceiling">
-
-            {this.state.collapse ?
-              <div className="ant-layout-wrapper right-collapsed">
-                Hello, {this.state.account.username} &nbsp;
-                <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
-              </div>
-              :
-              <div className="ant-layout-wrapper right-uncollapse">
-                Hello, {this.state.account.username} &nbsp;
-                <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
-              </div>
-            }
-
+          <div className="ant-layout-header">
+            <div className="ant-layout-ceiling">
+              {this.state.collapse ?
+                <div className="ant-layout-wrapper right-collapsed">
+                  Hello, {this.state.account.username} &nbsp;
+                  <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
+                </div>
+                :
+                <div className="ant-layout-wrapper right-uncollapse">
+                  Hello, {this.state.account.username} &nbsp;
+                  <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
+                </div>
+              }
+            </div>
           </div>
-
-          <div className="ant-layout-header"></div>
           <div className="ant-layout-breadcrumb">
             <Breadcrumb>
               <Breadcrumb.Item>首页</Breadcrumb.Item>

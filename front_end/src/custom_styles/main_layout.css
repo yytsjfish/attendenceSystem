@@ -162,6 +162,7 @@
 
 .ant-layout-aside .ant-layout-container {
   margin: 24px 16px;
+  top: 64px;
 }
 
 .ant-layout-aside .ant-layout-content {
@@ -170,7 +171,11 @@
 }
 
 .content-layout-height {
-  height: 650px;
+  /*min-height: 69rem;*/
+  /*设置为窗口高度的百分比*/
+  min-height: 90vh;
+  /*将main元素宽高计算方式改为包含内边距和边框*/
+  /*box-sizing: border-box;*/
 }
 
 .ant-layout-aside .ant-layout-footer {
@@ -190,6 +195,7 @@
   line-height: 30px;
   background-color: #404040;
   color: #ddd;
+  z-index: 10;
   position: fixed;
   width: 100%;
 }

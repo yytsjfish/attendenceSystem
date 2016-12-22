@@ -2,7 +2,6 @@ import React from 'react';
 import MyLeave from '../custom_pages/MyLeave';
 import MyOut from '../custom_pages/MyOut';
 import MyAttendence from '../custom_pages/MyAttendence';
-import NotFound from '../custom_pages/NotFound';
 
 
 class MainPageRoutes extends React.Component {
