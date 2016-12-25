@@ -45,3 +45,8 @@
   top: 0;
   text-align: left;
 }
+
+.float-submit-button .ant-btn{
+  float: right;
+  margin: 0.7rem;
+}

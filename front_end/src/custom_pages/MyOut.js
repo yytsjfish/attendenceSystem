@@ -1,9 +1,10 @@
 import React from 'react';
-import { Table, Input, Button, Popover, Modal, Select, TimePicker, DatePicker } from 'antd';
+import { Table, Input, Button, Popover, Modal } from 'antd';
 import moment from 'moment';
+import NewOutItem from '../custom_components/NewOutItem';
 import '../custom_styles/my_out.css';
 
-const data = [{
+var data = [{
   key: '1',
   time: moment({years: '2015', months: '2', date: '12'}).format("YYYY-MM-DD"),
   type: '培训',
@@ -139,6 +140,7 @@ class MyOut extends React.Component {
       data: data,
       searchText: '',
       addModalVisible: false,
+      formValues: '',
     };
   }
 
@@ -150,13 +152,11 @@ class MyOut extends React.Component {
   }
 
   onSearch=() => {
-    console.log('search text::', this.state.searchText);
     const { searchText } = this.state;
     const reg = new RegExp(searchText, 'gi');
     this.setState((prevState, props) => ({
       filterDropdownVisible: false,
       data: data.map((record) => {
-        console.log('record::', record);
         const match = record.type.match(reg);
         if (!match) {
           return null;
@@ -175,22 +175,20 @@ class MyOut extends React.Component {
     }));
   }
 
-  setAddModalVisible=(addModalVisible) => {
+  formSubmit=(values) => {
+    values.appStatus='待审批';
+    values.appTime=moment().format("YYYY-MM-DD");
+    data.unshift(values);
     this.setState((prevState, props) => ({
-      addModalVisible
+      data: data,
+      formValues: values,
+      addModalVisible: false,
     }));
   }
 
-  handleSelect=(value) => {
-    console.log(`selected ${value}`);
-  }
-
-  beforeDate=(current) => {
-    return current.valueOf() < moment() || current.valueOf() > moment().add(20, 'days');
-  }
-
-
   render () {
+    console.log('state;', this.state.formValues);
+
     const columns = [{
       title: '外出类型',
       dataIndex: 'type',
@@ -258,61 +256,17 @@ class MyOut extends React.Component {
       simple: 'simple',
     }
 
-    /*设置modal的footer属性为{footer}*/
-    const footer =
-                  <div>
-                    <Button type='ghost' onClick={() => this.setAddModalVisible(false)} style={{float: 'left', marginLeft: '1rem',}}>取消</Button>
-                    <Button type='primary' onClick={() => this.setAddModalVisible(false)} style={{marginRight: '0.5rem',}}>确定</Button>
-                  </div>;
-
-    const outTypeSelector =
-                  <Select showSearch  style={{width: '80%'}} placeholder="选择外出类型" optionFilterProp="children" onChange={this.handleSelect}>
-                    <Option value="培训">培训</Option>
-                    <Option value="招聘">招聘</Option>
-                    <Option value="市场调研">市场调研</Option>
-                    <Option value="技术支援">技术支援</Option>
-                    <Option value="其他">其他</Option>
-                  </Select>;
-
-    const outDays = <TimePicker placeholder='选择天数' format='mm' />;
-
-    const outPlace = <Input style={{width: '80%'}} placeholder="填写外出地点" defaultValue='' onPressEnter />
-
-    const outDate = <DatePicker showToday={false} placeholder='外出日期' defaultValue={moment({})} disabledDate={this.beforeDate}  />
-
-    const detailReason = <Input placeholder='填写外出详细原因' type='textarea' rows={4} />
-
     return (
       <div>
         <p className='float-element' >共{this.state.data.length}条申请</p>
-        <Button type='primary' icon='plus' className='float-element-button' onClick={() => this.setAddModalVisible(true)}>添加</Button>
+        <Button type='primary' icon='plus' className='float-element-button' onClick={() => this.setState(() => ({addModalVisible: true}))}>添加</Button>
         <Modal
           title="申请新的外出" closable={false} maskClosable={false}
           wrapClassName='vertical-center-modal'
           visible={this.state.addModalVisible}
-          onOk={() => this.setAddModalVisible(false)}
-          onCancel={() => this.setAddModalVisible(false)}
+          footer={null}
           >
-            <div style={{float: 'left', width: '65%'}}>
-              <p>外出类型</p>
-              {outTypeSelector}
-            </div>
-            <div>
-              <p>外出天数</p>
-              {outDays}
-            </div>
-            <div style={{float: 'left', width: '65%', marginTop: '0.4rem'}}>
-              <p>外出地点</p>
-              {outPlace}
-            </div>
-            <div style={{marginTop: '0.4rem',}}>
-              <p>外出日期</p>
-              {outDate}
-            </div>
-            <div style={{marginTop: '0.4rem',}}>
-              <p>详细原因</p>
-              {detailReason}
-            </div>
+          <NewOutItem formSubmit={this.formSubmit} formCancel={() => this.setState(() => ({addModalVisible: false}))} />
         </Modal>
         <h3 style={{marginBottom: '1.5rem'}}>外出申请</h3>
         <Table columns={columns} dataSource={this.state.data} pagination={pagination} />
@@ -322,3 +276,11 @@ class MyOut extends React.Component {
 }
 
 export default MyOut;
+
+
+/*设置modal的footer属性为{footer}*/
+// const footer =
+//               <div>
+//                 <Button type='ghost' onClick={() => this.setAddModalVisible(false)} style={{float: 'left', marginLeft: '1rem',}}>取消</Button>
+//                 <Button type='primary' onClick={() => this.setAddModalVisible(false)} style={{marginRight: '0.5rem',}}>确定</Button>
+//               </div>;
