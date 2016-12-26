@@ -39,23 +39,11 @@
   width: 0;
 }
 
-@media (min-device-width: 374px) {
-  .vertical-center-modal .ant-modal {
-    display: inline-block;
-    vertical-align: middle;
-    top: 0;
-    text-align: left;
-    width: 350px;
-  }
-}
-
-@media (min-device-width: 400px) {
-  .vertical-center-modal .ant-modal {
-    display: inline-block;
-    vertical-align: middle;
-    top: 0;
-    text-align: left;
-  }
+.vertical-center-modal .ant-modal {
+  display: inline-block;
+  vertical-align: middle;
+  top: 0;
+  text-align: left;
 }
 
 .float-submit-button .ant-btn{

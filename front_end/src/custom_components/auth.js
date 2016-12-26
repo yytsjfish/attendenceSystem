@@ -42,23 +42,20 @@ export default {
   onChange() {}
 }
 
-// function pretendRequest(email, pass, cb) {
-//   setTimeout(() => {
-//     if (email === 'joe@example.com' && pass === 'password1') {
-//       cb({
-//         authenticated: true,
-//         token: Math.random().toString(36).substring(7)
-//       })
-//     } else {
-//       cb({ authenticated: false })
-//     }
-//   }, 0)
-// };
-
 function pretendRequest(email, pass, cb) {
+  const accountInfo = [{
+    username: 'yufujia', password: 'fish95520', position: '2'
+  },{
+    username: 'yuyiding', password: '98647095', position: '1'
+  },{
+    username: 'yuergou', password: '02219303', position: '0'
+  }]
   setTimeout(() => {
-    if (email === 'yufujia' && pass === "fish95520") {
-      var Account = JSON.stringify({username: email, password: pass});
+    var authInfo = accountInfo.filter(function(item, index, array) {
+      return item.username === email
+    })
+    if (authInfo.length === 1) {
+      var Account = JSON.stringify(accountInfo[0]);
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7),

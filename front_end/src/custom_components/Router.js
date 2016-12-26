@@ -34,11 +34,15 @@ class CustomRouter extends React.Component {
     }
   }
 
+  createElement=(Component, props) => {
+    return <Component {...props} account={auth.getAccount() ? JSON.parse(auth.getAccount()) : auth.getAccount()}/>
+  }
+
   render () {
     const LogIn = withRouter(Login);
 
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} createElement={this.createElement}>
         <Route path="/" component={App} >
           <IndexRedirect to="/login" />
           <Route path="login" component={LogIn} />

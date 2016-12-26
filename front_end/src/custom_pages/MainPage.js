@@ -12,14 +12,7 @@ class MainPage extends Component {
     super(props);
     this.state = {
       collapse: true,
-      account: {},
     };
-  }
-
-  componentWillMount() {
-    this.setState((prevStatem, props) => ({
-      account: JSON.parse(auth.getAccount()),
-    }));
   }
 
   onCollapseChange() {
@@ -68,6 +61,7 @@ class MainPage extends Component {
         </SubMenu>
      );
 
+     console.log('account,', typeof(this.props.account));
     return (
       <div className={collapse ? "ant-layout-aside ant-layout-aside-collapse" : "ant-layout-aside"}>
         <aside className="ant-layout-sider">
@@ -95,8 +89,8 @@ class MainPage extends Component {
               </Link>
             </Menu.Item>
 
-            {UncheckedSubMenu}
-            {CheckedSubMenu}
+            {this.props.account.position > 0 && UncheckedSubMenu}
+            {this.props.account.position > 0 && CheckedSubMenu}
 
           </Menu>
 
@@ -110,12 +104,12 @@ class MainPage extends Component {
             <div className="ant-layout-ceiling">
               {this.state.collapse ?
                 <div className="ant-layout-wrapper right-collapsed">
-                  Hello, {this.state.account.username} &nbsp;
+                  Hello, {this.props.account.username} &nbsp;
                   <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
                 </div>
                 :
                 <div className="ant-layout-wrapper right-uncollapse">
-                  Hello, {this.state.account.username} &nbsp;
+                  Hello, {this.props.account.username} &nbsp;
                   <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
                 </div>
               }
@@ -144,6 +138,12 @@ class MainPage extends Component {
   }
 }
 
-
-
 export default MainPage;
+
+/*
+* componentWillMount() {
+*   this.setState((prevStatem, props) => ({
+*     account: JSON.parse(auth.getAccount()),
+*   }));
+* }
+*/

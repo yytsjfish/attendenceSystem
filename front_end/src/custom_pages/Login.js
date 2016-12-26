@@ -4,8 +4,6 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 import auth from '../custom_components/auth.js';
 
-
-
 const Login = Form.create()(class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +13,7 @@ const Login = Form.create()(class LoginForm extends Component {
   }
 
 /*
-* this.props.router属性，只有组件在Router中被withRouter()调用后获得
+* this.props.router属性，在Router中获得
 */
 
   handleSubmit=(e) => {

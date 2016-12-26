@@ -6,7 +6,7 @@ import moment from 'moment';
 
 
 const NewOutItem = Form.create()(class NewOutItemForm extends Component {
-
+  
   beforeDate=(current) => {
     return current.valueOf() <= moment() || current.valueOf() > moment().add(20, 'days');
   }
@@ -30,27 +30,29 @@ const NewOutItem = Form.create()(class NewOutItemForm extends Component {
 
     const { getFieldDecorator } = this.props.form;
 
-
     return (
       <Form onSubmit={this.onSubmit} horizontal>
         <Row>
           <Col key='1'>
-            <FormItem {...formItemLayout} label='外出类型' >
+            <FormItem {...formItemLayout} label='请假类型' >
               {getFieldDecorator('type', {
-                rules: [{ required: true, message: '请选择外出类型' }],
+                rules: [{ required: true, message: '请选择请假类型' }],
               })(
-                <Select showSearch  placeholder="选择外出类型" optionFilterProp="children" >
-                  <Option value="培训">培训</Option>
-                  <Option value="招聘">招聘</Option>
-                  <Option value="市场调研">市场调研</Option>
-                  <Option value="技术支援">技术支援</Option>
-                  <Option value="其他">其他</Option>
+                <Select showSearch  placeholder="选择请假类型" optionFilterProp="children" >
+                  <Option value="病假">病假</Option>
+                  <Option value="事假">事假</Option>
+                  <Option value="年假">年假</Option>
+                  <Option value="婚假">婚假</Option>
+                  <Option value="陪产假">陪产假</Option>
+                  <Option value="产检假">产检假</Option>
+                  <Option value="产假">产假</Option>
+                  <Option value="工伤假">工伤假</Option>
                 </Select>
               )}
             </FormItem>
-            <FormItem {...formItemLayout} label='外出天数'>
+            <FormItem {...formItemLayout} label='请假天数'>
               {getFieldDecorator('days', {
-                rules: [{ required: true, message: '请选择外出天数' }],
+                rules: [{ required: true, message: '请选择请假天数' }],
               })(
                 <TimePicker placeholder='选择天数' format='mm' disabledMinutes={()=>{return [0];}} hideDisabledOptions={true}/>
               )}
@@ -59,20 +61,12 @@ const NewOutItem = Form.create()(class NewOutItemForm extends Component {
         </Row>
         <Row>
           <Col key='2'>
-            <FormItem {...formItemLayout} label='外出地点' >
-              {getFieldDecorator('place', {
-                initialValue: '',
-                rules: [{ required: true, message: '请填写外出地点' }],
-              })(
-                <Input placeholder="填写外出地点" />
-              )}
-            </FormItem>
-            <FormItem {...formItemLayout} label='外出日期' >
+            <FormItem {...formItemLayout} label='请假日期' >
               {getFieldDecorator('time', {
                 initialValue: moment().add(1, 'days'),
-                rules: [{ required: true, message: '请选择外出日期' }],
+                rules: [{ required: true, message: '请选择请假日期' }],
               })(
-                <DatePicker showToday={false} placeholder='外出日期' disabledDate={this.beforeDate} />
+                <DatePicker showToday={false} placeholder='请假日期' disabledDate={this.beforeDate} />
               )}
             </FormItem>
           </Col>
@@ -83,7 +77,7 @@ const NewOutItem = Form.create()(class NewOutItemForm extends Component {
               {getFieldDecorator('reason', {
                 rules: [{ required: true, message: '填写详细原因' }],
               })(
-                <Input placeholder='请填写外出详细原因' type='textarea' rows={4} />
+                <Input placeholder='请填写请假详细原因' type='textarea' rows={4} />
               )}
             </FormItem>
           </Col>
@@ -102,10 +96,3 @@ const NewOutItem = Form.create()(class NewOutItemForm extends Component {
 });
 
 export default NewOutItem;
-
-/*
-* <Button onClick={this.submitForm}>Submit</Button>
-* submitForm=() => {
-*   this.props.form.submit(this.onSubmit);
-* }
-*/

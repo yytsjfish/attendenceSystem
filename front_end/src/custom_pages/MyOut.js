@@ -140,7 +140,6 @@ class MyOut extends React.Component {
       data: data,
       searchText: '',
       addModalVisible: false,
-      formValues: '',
     };
   }
 
@@ -180,15 +179,11 @@ class MyOut extends React.Component {
     values.appTime=moment().format("YYYY-MM-DD");
     data.unshift(values);
     this.setState((prevState, props) => ({
-      data: data,
-      formValues: values,
       addModalVisible: false,
     }));
   }
 
   render () {
-    console.log('state;', this.state.formValues);
-
     const columns = [{
       title: '外出类型',
       dataIndex: 'type',
