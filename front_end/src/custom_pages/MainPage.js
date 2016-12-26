@@ -7,6 +7,8 @@ import '../custom_styles/main_layout.css';
 import logoURL from '../custom_components/logo.png';
 const SubMenu = Menu.SubMenu;
 
+const headURL = "http://img.116s.com/2015-06/17/143455142000011.jpg";
+
 class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -112,14 +114,11 @@ class MainPage extends Component {
                   <Link to="/login"><Button size="small" onClick={this.handleClick}>Logout</Button></Link>
                 </div>
               }
+              <img src={headURL} alt="header" className="header-img" />
             </div>
           </div>
           <div className="ant-layout-breadcrumb">
-            <Breadcrumb>
-              <Breadcrumb.Item>首页</Breadcrumb.Item>
-              <Breadcrumb.Item>我的请假</Breadcrumb.Item>
-              <Breadcrumb.Item>请假申请</Breadcrumb.Item>
-            </Breadcrumb>
+            <Breadcrumb routes={this.props.routes} params={this.props.params} />
           </div>
           <div className="ant-layout-container">
             <div className="ant-layout-content">

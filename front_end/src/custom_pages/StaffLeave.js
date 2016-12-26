@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Input, Button, Popover, Modal } from 'antd';
+import { Table, Input, Button, Popover } from 'antd';
 import moment from 'moment';
 import '../custom_styles/staff.css';
 

@@ -233,4 +233,13 @@
 
 .ant-layout-wrapper {
   padding: 0 50px;
+  padding-left: 12px;
+}
+
+.header-img {
+  float: right;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin-top: 15px;
 }

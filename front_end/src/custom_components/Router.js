@@ -47,9 +47,9 @@ class CustomRouter extends React.Component {
           <IndexRedirect to="/login" />
           <Route path="login" component={LogIn} />
           <Redirect from="mainpage" to="mainpage/myattendence" />
-          <Route path="mainpage" component={MainPage} onEnter={this.requireAuth} >
-            <Route path="/mainpage/:pagename" component={MainPageRoutes} onEnter={this.checkURL} />
-            <Route path="/mainpage/:pagename/:apply" component={ManagerRoutes} onEnter={this.checkURL} />
+          <Route name='mainpage' breadcrumbName="主页" path="mainpage" component={MainPage} onEnter={this.requireAuth} >
+            <Route name='basic' breadcrumbName="基本 &nbsp;/ &nbsp;:pagename" path="/mainpage/:pagename" component={MainPageRoutes} onEnter={this.checkURL} />
+            <Route name='management' breadcrumbName="管理 &nbsp;/ &nbsp;:apply" path="/mainpage/:pagename/:apply" component={ManagerRoutes} onEnter={this.checkURL} />
           </Route>
           <Route path="**" component={NotFound} />
         </Route>
