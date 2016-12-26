@@ -61,7 +61,6 @@ class MainPage extends Component {
         </SubMenu>
      );
 
-     console.log('account,', typeof(this.props.account));
     return (
       <div className={collapse ? "ant-layout-aside ant-layout-aside-collapse" : "ant-layout-aside"}>
         <aside className="ant-layout-sider">

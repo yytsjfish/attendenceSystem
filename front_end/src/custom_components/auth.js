@@ -44,18 +44,18 @@ export default {
 
 function pretendRequest(email, pass, cb) {
   const accountInfo = [{
-    username: 'yufujia', password: 'fish95520', position: '2'
+    id: '201612001', username: 'yufujia', password: 'fish95520', position: '2'
   },{
-    username: 'yuyiding', password: '98647095', position: '1'
+    id: '201612002', username: 'yuyiding', password: '98647095', position: '1'
   },{
-    username: 'yuergou', password: '02219303', position: '0'
+    id: '201612003', username: 'yuergou', password: '02219303', position: '0'
   }]
   setTimeout(() => {
     var authInfo = accountInfo.filter(function(item, index, array) {
-      return item.username === email
+      return item.username === email && item.password === pass
     })
     if (authInfo.length === 1) {
-      var Account = JSON.stringify(accountInfo[0]);
+      var Account = JSON.stringify(authInfo[0]);
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7),
